@@ -1,0 +1,38 @@
+Here is our solution code:
+
+def remove_duplicate_ids(ids_list):
+    '''
+    INPUTS:
+        ids_list: A sorted Python list in increasing order.
+    OUTPUT:
+        A tuple with the number of unique elements N and the updated ids_list
+        output = (N, ids_list)
+    '''
+    # Get list length
+    num_entries = len(ids_list)
+    # Use this variable to track which index we're updating
+    index_to_update = 1
+    # Note how we start at index 1, since we will use i-1 (starting at zero!)
+    for i in range(1, num_entries):
+        # Two "pointers" traverse the list, checking the pairs for matches
+        # If we have a match, then its a duplicate 
+        # The moment the pairs don't match up, means we hit a new unique entry!
+        if ids_list[i] != ids_list[i-1]:
+            # We just hit a new unique entry, so we update the index 
+            ids_list[index_to_update] = ids_list[i]
+            # Then finally we update the index_to_update variable
+            index_to_update += 1 
+        
+    # Directly reflects how many times we had to update
+    # Thus, same as how many unique elements there are 
+    N = index_to_update 
+    return (N, ids_list[:N])
+
+
+This code defines a function called remove_duplicate_ids that takes in a sorted list of IDs and returns a tuple with the number of unique IDs in the list and the updated list with duplicate IDs removed.
+
+The key idea is to go through the list in "pairs", index i and index i-1 (or you could have also done i and i+1), its up to you to start at index 1 or index 0 depending on the approach.
+
+The function first gets the length of the list and initializes a variable called index_to_update to 1. It then iterates over the elements in the list, starting at index 1. For each element, it compares it to the element at the previous index (i-1) and checks if they are equal. If they are, it means that the current element is a duplicate of the previous element and should be skipped. If they are not equal, it means that the current element is a unique ID and should be added to the updated list. The function updates the index_to_update variable each time it adds a unique ID to the updated list.
+
+Finally, the function returns a tuple with the number of unique IDs (N) and the updated list with duplicate IDs removed (ids_list[:N]).
